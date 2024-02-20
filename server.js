@@ -3,6 +3,7 @@ require('dotenv').config();
 const express     = require('express');
 const bodyParser  = require('body-parser');
 const cors        = require('cors');
+const helmet      = require('helmet');
 
 const apiRoutes         = require('./routes/api.js');
 const fccTestingRoutes  = require('./routes/fcctesting.js');
@@ -10,6 +11,14 @@ const runner            = require('./test-runner');
 require('./db-connection.js');
 
 const app = express();
+app.use(helmet.contentSecurityPolicy({
+  directives:{
+    defaultSrc: ["'self'"], // Only allow resources from the same origin
+    scriptSrc: ["'self'", "https://code.jquery.com/jquery-2.2.1.min.js"], // Allowing scripts from the same origin and from a specific CDN
+    styleSrc: ["'self'"] // Allow stylesheets from the same origin
+  },
+}));
+
 
 app.use('/public', express.static(process.cwd() + '/public'));
 
