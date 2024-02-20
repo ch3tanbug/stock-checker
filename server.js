@@ -11,7 +11,15 @@ const runner            = require('./test-runner');
 require('./db-connection.js');
 
 const app = express();
-app.use(helmet.contentSecurityPolicy({ directives: { defaultSrc: ["'self'"], scriptSrc: ["'self'"] ,styleSrc: ["'self"]}} ));
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+    },
+  })
+);
 
 
 app.use('/public', express.static(process.cwd() + '/public'));
