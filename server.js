@@ -14,7 +14,7 @@ const app = express();
 app.use(helmet.contentSecurityPolicy({
   directives:{
     defaultSrc: ["'self'"], // Only allow resources from the same origin
-    scriptSrc: ["'self'", "https://code.jquery.com/jquery-2.2.1.min.js"], // Allowing scripts from the same origin and from a specific CDN
+    scriptSrc: ["'self'"], // Allowing scripts from the same origin and from a specific CDN
     styleSrc: ["'self'"] // Allow stylesheets from the same origin
   },
 }));
